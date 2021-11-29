@@ -2,10 +2,14 @@ package com.govind.springappdevelopment.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.govind.springappdevelopment.model.User;
 
 @RestController
 @RequestMapping("/hello")
@@ -17,7 +21,6 @@ public class HelloWorldController {
 		return "Hello Perfios Software Solution";
 	}
 	
-	
 //	curl -X GET "http://localhost:8080/hello/query/?fName=Govind&lName=kumar" -w "\n"
 	@RequestMapping(value= {"/query"},method=RequestMethod.GET)
 	public String sayHello(@RequestParam(value="fName") String fName,@RequestParam(value="lName") String lName){
@@ -27,5 +30,10 @@ public class HelloWorldController {
 	@GetMapping("/param/{name}")
 	public String sayHelloParam(@PathVariable String name) {
 		return "Hello "+name+" !";
+	}
+//	curl -X POST -H "Content-Type:application/json" -d '{"firstName":"Govind","lastName":"Kumar"}' "http://localhost:8080/hello/post" -w "\n"
+	@PostMapping("/post")
+	public String sayHello(@RequestBody User user) {
+		return "Hello "+user.getFirstName()+" "+user.getLastName()+" !";
 	}
 }
