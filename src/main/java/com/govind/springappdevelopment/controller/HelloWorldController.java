@@ -14,4 +14,11 @@ public class HelloWorldController {
 	public String syHello() {
 		return "Hello Perfios Software Solution";
 	}
+	
+	
+//	curl localhost:8080/hello/query/?name="Govind" -w "\n"
+	@RequestMapping(value= {"/query"},method=RequestMethod.GET)
+	public String sayHello(@RequestParam(value="name") String name){
+		return "Hello "+name+ "!";
+	}
 }
